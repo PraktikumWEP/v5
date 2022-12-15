@@ -12,6 +12,15 @@ class BackendService {
         $this->id = $id;
     }
 
+    public function test() {
+        try {
+            return HttpClient::get($this->url . '/test.json');
+        } catch(\Exception $e) {
+            error_log($e);
+        }
+            return false;
+    }
+
     public function login($username, $password) {
         try {
             $result = HttpClient::post($this->url . "/" . $this->id . "/login", 

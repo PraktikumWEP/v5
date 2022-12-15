@@ -1,9 +1,13 @@
 <?php
     require("start.php");
-    $user = new Model\User("Test");
+    
+    $user = new model\User("Test");
     $json = json_encode($user);
     echo $json . "<br>";
     $jsonObject = json_decode($json);
-    $newUser = Model\User::fromJson($jsonObject);
+    $newUser = model\User::fromJson($jsonObject);
     var_dump($newUser);
+
+    $service = new utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
+    var_dump($service->test());
 ?>
