@@ -65,4 +65,14 @@
 
     echo "FRIEND DISMISS TEST";
     var_dump($service->friendRemove($friend));
+
+    echo "<br><br>";
+
+    echo "USER EXISTS TEST";
+    var_dump($service->userExists("steven"));
+
+    echo "<br><br>";
+
+    echo "UNREAD MESSAGES TEST";
+    var_dump($service->getUnread());
 ?>

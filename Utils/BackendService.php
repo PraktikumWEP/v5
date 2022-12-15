@@ -121,5 +121,25 @@ class BackendService {
             return false;
         }
     }
+
+    // use for login check
+    public function userExists($username) {
+        try {
+            HttpClient::get($this->url . "/" . $this->id . "/user" . "/" . $username, $_SESSION["chat_token"]);
+            return true;
+        } catch(\Exception $e) {
+            return false;
+        }
+    }
+
+    public function getUnread() {
+        try {
+            $result = HttpClient::get($this->url . "/" . $this->id . "/unread", $_SESSION["chat_token"]);
+            return $result;
+        } catch(\Exception $e) {
+            echo "<br>unread error: " . $e . "<br>";
+            return false;
+        }
+    }
 }
 ?>
