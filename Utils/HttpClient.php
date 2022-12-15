@@ -1,5 +1,5 @@
 <?php
-namespace Utils;
+namespace utils;
 
 class HttpClient {
     // Source: https://thisinterestsme.com/sending-json-via-post-php/
