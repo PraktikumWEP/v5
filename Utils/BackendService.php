@@ -25,7 +25,7 @@ class BackendService {
         try {
             $result = HttpClient::post($this->url . "/" . $this->id . "/login", 
                 array("username" => $username, "password" => $password));
-            echo "login ok<br>";
+            $_SESSION["chat_token"] = $result->token;
             return true;
         } catch(\Exception $e) {
             echo "login error: " . $e . "<br>";
@@ -37,8 +37,7 @@ class BackendService {
         try {
             $result = HttpClient::post($this->url . "/" . $this->id . "/register", 
                 array("username" => $username, "password" => $password));
-            //echo "Token: " . $result->token;
-            $_SESSION['token'] = $result->token; // save for subsequent calls
+            $_SESSION['chat_token'] = $result->token;
             return true;
         } catch(\Exception $e) {
             echo "register error: " . $e . "<br>";
