@@ -13,7 +13,6 @@
     echo "<br><br>";
 
     echo "TEST TEST";
-    $service = new utils\BackendService(CHAT_SERVER_URL, CHAT_SERVER_ID);
     var_dump($service->test());
 
     echo "<br><br>";
