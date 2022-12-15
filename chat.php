@@ -20,19 +20,19 @@
                     <h1>Chat with Jerry</h1>
                 </div>
                 <div class="breadcrumb mElement">
-                    <a class="link" href="friendlist.html">
+                    <a class="link" href="friendlist.php">
                         &lt; Back
                     </a>
                     <label class="breadcrumb-divider">
                         &nbsp;|&nbsp;
                     </label>
-                    <a class="link" href="profile.html">
+                    <a class="link" href="profile.php">
                         Profile
                     </a>
                     <label class="breadcrumb-divider">
                         &nbsp;|&nbsp;
                     </label>
-                    <a class="link removeFriend" href="friendlist.html">
+                    <a class="link removeFriend" href="friendlist.php">
                         <span>Remove Friend</span>
                     </a>
                 </div>

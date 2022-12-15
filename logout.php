@@ -27,7 +27,7 @@
                         <label>See u!</label>
                     </div>
                     <div class="mElement">
-                        <a href="login.html" class="link">Login again</a>
+                        <a href="login.php" class="link">Login again</a>
                     </div>
                 </div>
             </div>

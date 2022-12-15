@@ -1,7 +1,7 @@
 <?php
-namespace Utils;
+namespace utils;
 
-use Utils\HttpClient;
+use utils\HttpClient;
 
 class BackendService {
     private $url;       // backend url

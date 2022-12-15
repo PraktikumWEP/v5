@@ -77,7 +77,7 @@
                     </fieldset>
                 </div>
                 <div class="button-box mElement pContainerS">
-                    <a href="friendlist.html">
+                    <a href="friendlist.php">
                         <button class="button mElement">
                             Cancel
                         </button>

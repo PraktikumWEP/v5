@@ -20,28 +20,28 @@
                     <h1>Friends</h1>
                 </div>
                 <div class="breadcrumb mElement">
-                    <a href="logout.html" class="link">&lt; Logout</a>
+                    <a href="logout.php" class="link">&lt; Logout</a>
                     <label class="breadcrumb-divider">&nbsp;|&nbsp;</label>
-                    <a href="settings.html" class="link">Settings</a>
+                    <a href="settings.php" class="link">Settings</a>
                 </div>
                 <hr class="friendlist-divider "></hr>
                 <div class="mElementM">
                     <section>
                         <ul>
                             <li>
-                                <a href="chat.html" class="link">Tom</a>
+                                <a href="chat.php" class="link">Tom</a>
                                 <label class="notification-count">3</label>
                             </li>
                             <li>
-                                <a href="chat.html" class="link">Marvin</a>
+                                <a href="chat.php" class="link">Marvin</a>
                                 <label class="notification-count">1</label>
                             </li>
                             <li>
-                                <a href="chat.html" class="link">Tick</a>
+                                <a href="chat.php" class="link">Tick</a>
                                 <label class="notification-count"></label>
                             </li>
                             <li>
-                                <a href="chat.html" class="link">Trick</a>
+                                <a href="chat.php" class="link">Trick</a>
                                 <label class="notification-count"></label>
                             </li>
                         </ul>
@@ -55,7 +55,14 @@
                         </div>
                         <div>
                             <ol>
-                                <li><a href="http://github.com/PraktikumWEP" class="link">Friend request from Track</a></li>
+                                <li>
+                                    <a class="link">Friend request from Track</a>
+                                    <div class="centerCol mElement">
+                                        <button class="button-small centerRow">Accept</button>
+                                        <div style="width: 10px"></div>
+                                        <button class="button-small centerRow">Decline</button>
+                                    </div>
+                                </li>
                             </ol>
                         </div>
                     </section>

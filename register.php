@@ -16,7 +16,7 @@
     <body>
         <div class="background centerRow">
             <div class="register max-width centerRowV card">
-                <form method="GET" action="friendlist.html" id="registerForm" class="centerRowV" name="registerForm">
+                <form method="GET" action="friendlist.php" id="registerForm" class="centerRowV" name="registerForm">
                     <div class="register-image">
                         <img src="./assets/images/user.png" alt="user" class="image">
                     </div>
@@ -64,8 +64,8 @@
                     </fieldset>
 
                     <div class="button-box mElement pContainerS">
-                        <a href="login.html">
-                            <button class="button-cancel button mElement">Cancel</button>
+                        <a href="login.php">
+                            <button type="button" class="button-cancel button mElement">Cancel</button>
                         </a>
                         <button class="button-create button mElement">Create Account</button>
                     </div>

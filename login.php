@@ -46,12 +46,12 @@
                 </div>
 
                 <div class="button-box mElement pContainerS">
-                    <a href="friendlist.html">
+                    <a href="friendlist.php">
                         <button type="button" class="button mElement">
                             Login
                         </button>
                     </a>
-                    <a href="register.html">
+                    <a href="register.php">
                         <button type="button" class="button mElement">
                             Register
                         </button>

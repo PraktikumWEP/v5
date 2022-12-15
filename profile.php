@@ -23,9 +23,9 @@
                     <h1>Profile of Tom</h1>
                 </div>
                 <div class="breadcrumb mElement">
-                    <a href="chat.html" class="link">&lt; Back to Chat</a>
+                    <a href="chat.php" class="link">&lt; Back to Chat</a>
                     <label class="breadcrumb-divider">&nbsp;|&nbsp;</label>
-                    <a href="friendlist.html" class="link removeFriend">Remove Friend</a>
+                    <a href="friendlist.php" class="link removeFriend">Remove Friend</a>
                 </div>
                 <div class="mElement">
                     <p class="paragraph">
