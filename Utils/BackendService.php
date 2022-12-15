@@ -60,7 +60,7 @@ class BackendService {
 
     public function saveUser($user) {
         try {
-            $result = HttpClient::post($this->url . "/" . $this->id . "/user", $user, $_SESSION["chat_token"]);
+            $result = HttpClient::post($this->url . "/" . $this->id . "/user", $user->jsonSerialize(), $_SESSION["chat_token"]);
             return $result;
         } catch (\Exception $e) {
             echo "<br>save user error: " . $e . "<br>";
@@ -84,10 +84,40 @@ class BackendService {
 
     public function friendRequest($friend) {
         try {
-            HttpClient::post($this->url . "/" . $this->id . "/friend", $friend ,$_SESSION["chat_token"]);
+            HttpClient::post($this->url . "/" . $this->id . "/friend", $friend->jsonSerialize() ,$_SESSION["chat_token"]);
             return true;
         } catch(\Exception $e) {
-            echo "<br>load friends error: " . $e . "<br>";
+            echo "<br>friend request error: " . $e . "<br>";
+            return false;
+        }
+    }
+
+    public function friendAccept($friend) {
+        try {
+            HttpClient::put($this->url . "/" . $this->id . "/friend" . "/" . $friend->getUsername(), array("status" => "accepted"), $_SESSION["chat_token"]);
+            return true;
+        } catch(\Exception $e) {
+            echo "<br>accept friend error: " . $e . "<br>";
+            return false;
+        }
+    }
+
+    public function friendDismiss($friend) {
+        try {
+            HttpClient::put($this->url . "/" . $this->id . "/friend" . "/" . $friend->getUsername(), array("status" => "dismissed"), $_SESSION["chat_token"]);
+            return true;
+        } catch(\Exception $e) {
+            echo "<br>dismiss friends error: " . $e . "<br>";
+            return false;
+        }
+    }
+
+    public function friendRemove($friend) {
+        try {
+            HttpClient::delete($this->url . "/" . $this->id . "/friend" . "/" . $friend->getUsername(), $_SESSION["chat_token"]);
+            return true;
+        } catch(\Exception $e) {
+            echo "<br>dismiss friends error: " . $e . "<br>";
             return false;
         }
     }

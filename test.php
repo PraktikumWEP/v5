@@ -48,6 +48,21 @@
     echo "<br><br>";
 
     echo "FRIEND REQUEST TEST";
-    $friend = new Friend("Jerry");
+    $friend = new Friend("Kek");
     var_dump($service->friendRequest($friend));
+
+    echo "<br><br>";
+
+    echo "FRIEND ACCEPT TEST";
+    var_dump($service->friendAccept($friend));
+
+    echo "<br><br>";
+
+    echo "FRIEND DISMISS TEST";
+    var_dump($service->friendDismiss($friend));
+
+    echo "<br><br>";
+
+    echo "FRIEND DISMISS TEST";
+    var_dump($service->friendRemove($friend));
 ?>
