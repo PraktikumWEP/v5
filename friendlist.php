@@ -6,7 +6,8 @@
         header("Location: login.php");
         exit();
     }
-
+    
+    // load friends & requests
     $result = $service->loadFriends();
     $friends = array();
     $requests = array();
@@ -19,6 +20,18 @@
                 $requests[] = $user;
             }
         }
+    }
+
+    // accept & dismiss
+    if(isset($_POST["accept"])) {
+        $user = new Friend($_POST["accept"]);
+        $service->friendAccept($user);
+        header("Location: friendlist.php");
+    }
+    if(isset($_POST["dismiss"])) {
+        $user = new Friend($_POST["dismiss"]);
+        $service->friendDismiss($user);
+        header("Location: friendlist.php");
     }
 ?>
 
@@ -53,15 +66,18 @@
                     <section>
                         <ul>
                             <?php
-                                if(isset($friends)) {
-                                    foreach($friends as $friend) {
-                                        echo                            
-                                            "<li>
-                                                <a href='chat.php?friend=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>
-                                                <label class='notification-count'>0</label>
-                                            </li>";
-                                    }
+                            if(isset($friends)) {
+                                foreach($friends as $friend) {
+                                    echo                            
+                                        "<li>
+                                            <a href='chat.php?friend=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>
+                                            <label class='notification-count'>0</label>
+                                        </li>";
                                 }
+                            }
+                            else {
+                                echo "No friend requests";
+                            }
                             ?>
                         </ul>
                     </section>
@@ -74,14 +90,21 @@
                         </div>
                         <div>
                             <ol>
-                                <li>
-                                    <a class="link">Friend request from Track</a>
-                                    <div class="centerCol mElement">
-                                        <button class="button-small centerRow">Accept</button>
-                                        <div style="width: 10px"></div>
-                                        <button class="button-small centerRow">Decline</button>
-                                    </div>
-                                </li>
+                                <?php
+                                if(isset($requests)) {
+                                    foreach($requests as $request) {
+                                        echo                            
+                                            "<li><form acton='friendlist.php' method='POST'>
+                                                <a class='link'>Friend request from " . $request->getUsername() ."</a>
+                                                <div class='centerCol mElement'>
+                                                    <button type='submit' class='button-small centerRow' name='accept' value='". $request->getUsername() ."'>Accept</button>
+                                                    <div style='width: 10px'></div>
+                                                    <button type='submit' class='button-small centerRow' name='dismiss' value='". $request->getUsername() ."'>Decline</button>
+                                                </div>
+                                            </form></li>";
+                                    }
+                                }
+                                ?>
                             </ol>
                         </div>
                     </section>
