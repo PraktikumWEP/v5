@@ -61,11 +61,11 @@ class BackendService {
 
     public function saveUser($user) {
         try {
-            $result = HttpClient::post($this->url . "/" . $this->id . "/user", $user->jsonSerialize(), $_SESSION["chat_token"]);
-            return $result;
+            HttpClient::post($this->url . "/" . $this->id . "/user", $user->jsonSerialize(), $_SESSION["chat_token"]);
+            return $user;
         } catch (\Exception $e) {
             echo "<br>save user error: " . $e . "<br>";
-            return false;
+            return null;
         }
     }
 
@@ -79,7 +79,7 @@ class BackendService {
             return $friends;
         } catch(\Exception $e) {
             echo "<br>load friends error: " . $e . "<br>";
-            return false;
+            return null;
         }
     }
 

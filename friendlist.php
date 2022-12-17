@@ -1,5 +1,13 @@
 <?php
     require("start.php");
+
+    if(!isset($_SESSION["user"])) {
+        header("Location: login.php");
+        exit();
+    }
+
+    $result = $service->loadFriends();
+    var_dump($result);
 ?>
 
 <!DOCTYPE html>
