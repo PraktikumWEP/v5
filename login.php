@@ -1,5 +1,26 @@
 <?php
     require("start.php");
+
+    if(isset($_SESSION["user"])) {
+        header("Location: friendlist.php");
+        exit();
+    }
+
+    // form
+    $username = "";
+    $password = "";
+    $error = "";
+    if(isset($_POST["username"]) && isset($_POST["password"])) {
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+
+        if($service->login($username, $password)) {
+            header("Location: friendlist.php");
+        }
+        else {
+            $error = "Authentication failed";
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -18,7 +39,7 @@
         <link rel="stylesheet" href="assets/css/components.css">
     </head>
     <body>
-        <div class="background centerRow">
+        <form class="background centerRow" action="login.php" method="POST">
             <div class="max-width centerRowV card">
                 <img src="assets/images/chat.png" class="image"></img>
                 <div class="mElementM">
@@ -35,7 +56,7 @@
                                 <label>Username</label>
                             </div>
                             <div class="mElement">
-                                <input type="text" placeholder="Username" class="input" required></input>
+                                <input type="text" placeholder="Username" class="input" name="username" value="<?= $username ?>" required></input>
                             </div>
                         </div>
                         <div class="mElementM">
@@ -43,15 +64,16 @@
                                 <label>Password</label>
                             </div>
                             <div class="mElement">
-                                <input type="password" placeholder="Password" class="input" required></input>
+                                <input type="password" placeholder="Password" class="input" name="password" value="<?= $password ?>" required></input>
                             </div>
                         </div>
                     </fieldset>
                 </div>
+                <div class="centerRow"><small class="error-message"><?= $error ?></small></div>
 
                 <div class="button-box mElement pContainerS">
                     <a href="friendlist.php">
-                        <button type="button" class="button mElement">
+                        <button type="submit" class="button mElement">
                             Login
                         </button>
                     </a>
@@ -62,6 +84,6 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </form>
     </body>
 </html>

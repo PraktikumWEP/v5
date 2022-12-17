@@ -28,9 +28,10 @@ class BackendService {
             $result = HttpClient::post($this->url . "/" . $this->id . "/login", 
                 array("username" => $username, "password" => $password));
             $_SESSION["chat_token"] = $result->token;
+            $_SESSION["user"] = $username;
             return true;
         } catch(\Exception $e) {
-            echo "<br>login error: " . $e . "<br>";
+            # echo "<br>login error: " . $e . "<br>";
             return false;
         }
     }
