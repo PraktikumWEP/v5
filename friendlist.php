@@ -1,12 +1,25 @@
 <?php
     require("start.php");
+    use model\Friend;
 
     if(!isset($_SESSION["user"])) {
         header("Location: login.php");
         exit();
     }
 
-    $friends = $service->loadFriends();
+    $result = $service->loadFriends();
+    $friends = array();
+    $requests = array();
+    if(isset($result)) {
+        foreach($result as $user) {
+            if($user->getStatus() == "accepted") {
+                $friends[] = $user;
+            }
+            else {
+                $requests[] = $user;
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
