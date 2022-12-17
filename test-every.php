@@ -74,4 +74,9 @@
 
     echo "UNREAD MESSAGES TEST";
     var_dump($service->getUnread());
+
+    echo "<br><br>";
+
+    echo "FRIEND REMOVE TEST";
+    var_dump($service->friendRemove($friend));
 ?>

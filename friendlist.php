@@ -6,8 +6,7 @@
         exit();
     }
 
-    $result = $service->loadFriends();
-    var_dump($result);
+    $friends = $service->loadFriends();
 ?>
 
 <!DOCTYPE html>
@@ -40,22 +39,17 @@
                 <div class="mElementM">
                     <section>
                         <ul>
-                            <li>
-                                <a href="chat.php" class="link">Tom</a>
-                                <label class="notification-count">3</label>
-                            </li>
-                            <li>
-                                <a href="chat.php" class="link">Marvin</a>
-                                <label class="notification-count">1</label>
-                            </li>
-                            <li>
-                                <a href="chat.php" class="link">Tick</a>
-                                <label class="notification-count"></label>
-                            </li>
-                            <li>
-                                <a href="chat.php" class="link">Trick</a>
-                                <label class="notification-count"></label>
-                            </li>
+                            <?php
+                                if(isset($friends)) {
+                                    foreach($friends as $friend) {
+                                        echo                            
+                                            "<li>
+                                                <a href='chat.php?friend=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>
+                                                <label class='notification-count'>0</label>
+                                            </li>";
+                                    }
+                                }
+                            ?>
                         </ul>
                     </section>
                 </div>
