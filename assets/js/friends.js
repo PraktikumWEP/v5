@@ -66,45 +66,68 @@ async function getFriends() {
     }
 }
 
+async function getUnread() {
+    let uri = "https://online-lectures-cs.thi.de/chat/" + chatCollectionId + "/unread";
+    let response = await fetch(uri, {
+        method: "GET",
+        headers: {
+            'Authorization': "Bearer " + chatToken
+        }
+    });
+    if(response.ok) {
+        let result = await response.json();
+        return result;
+    }
+    else {
+        console.error('error ' + response.status);
+    }
+}
+
 setInterval(async () => {
     let friendlist = document.getElementById("friendlist");
     let requestList= document.getElementById("requests");
     let friends = document.createElement("div");
     let requests = document.createElement("div");
     let result = await getFriends();
+    let result2 = await getUnread();
     result.forEach(friend => {
         if(friend.status == "accepted") {
+            let count = 0;
+            if(result2[friend.username] != null) {
+                count = result2[friend.username];
+            }
             let li = document.createElement("li");
-
-            let a = document.createElement("a");
-            a.setAttribute("href", "chat.php?friend=" + friend.username);
-            a.classList.add("link");
-            a.innerHTML = friend.username;
-    
-            let label = document.createElement("label");
-            label.classList.add("notification-count");
-            label.innerHTML = 0;
-    
-            li.appendChild(a);
-            li.appendChild(label);
+            li.innerHTML = "<a href='chat.php?friend=" + friend.username + "' class='link'>" + friend.username + "</a>" +
+                           "<label class='notification-count'>" + count + "</label>";
             friends.appendChild(li);
         }
         else {
             let li = document.createElement("li");
             li.innerHTML = "<form action='friendlist.php' method='POST'>" + 
-                                "<a class='link'>Friend request from " + friend.username + "</a>" +
+                                "<a>Friend request from <span class='link'>" + friend.username + "</span></a>" +
                                 "<div class='centerCol mElement'>" + 
                                     "<button type='submit' class='button-small centerRow' name='accept' value=" + friend.username + ">Accept</button>" + 
                                     "<div style='width: 10px'></div>" +
-                                    "<button type='submit' class='button-small centerRow' name='dismiss' value=" + friend.username + ">Accept</button>" +
+                                    "<button type='submit' class='button-small centerRow' name='dismiss' value=" + friend.username + ">Decline</button>" +
                                 "</div>" + 
                             "</form>";
             requests.appendChild(li);
         }
     });
 
-    friendlist.innerHTML = friends.innerHTML;
-    requestList.innerHTML = requests.innerHTML;
+    if(friends.firstChild) {
+        friendlist.innerHTML = friends.innerHTML;
+    }
+    else {
+        friendlist.innerHTML = "No friends";
+    }
+
+    if(requests.firstChild) {
+        requestList.innerHTML = requests.innerHTML;
+    }
+    else {
+        requestList.innerHTML = "No friend requests";
+    }
 }, 2000)
 
 

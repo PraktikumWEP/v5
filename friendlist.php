@@ -89,7 +89,14 @@
                                 foreach($friends as $friend) {                         
                                     echo "<li>";
                                     echo         "<a href='chat.php?friend=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>";
-                                    echo         "<label class='notification-count'>0</label>";
+                                    echo         "<label class='notification-count'>";
+                                    if(isset($unread->{$friend->getUsername()})) {
+                                        echo $unread->{$friend->getUsername()};
+                                    }
+                                    else {
+                                        echo "0";
+                                    }
+                                    echo "</label>";
                                     echo "</li>";
                                 }
                             }
@@ -113,7 +120,7 @@
                                     foreach($requests as $request) {
                                         echo                            
                                             "<li><form action='friendlist.php' method='POST'>
-                                                <a class='link'>Friend request from " . $request->getUsername() . "</a>
+                                                <a>Friend request from <span class='link'>" . $request->getUsername() . "</span></a>
                                                 <div class='centerCol mElement'>
                                                     <button type='submit' class='button-small centerRow' name='accept' value='". $request->getUsername() ."'>Accept</button>
                                                     <div style='width: 10px'></div>
