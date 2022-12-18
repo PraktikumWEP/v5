@@ -1,5 +1,54 @@
 <?php
     require("start.php");
+
+    // form
+    $username = "";
+    $password = "";
+    $password_repeat = "";
+    if(isset($_POST["username"]) && isset($_POST["password1"]) && isset($_POST["password2"])) {
+
+        // constants
+        define("MIN_PASSWORD_LENGTH", 8);
+        define("MIN_USERNAME_LENGTH", 3);
+
+        // data from form
+        $username = $_POST["username"];
+        $password = $_POST["password1"];
+        $password_repeat = $_POST["password2"];
+
+        // trim
+        $username = trim($username);
+        $password = trim($password);
+        $password_repeat = trim($password_repeat);
+
+        // booleans
+        $username_OK = false;
+        $password1_OK = false;
+        $password2_OK = false;
+
+        // check username
+        if((strlen($username) >= MIN_USERNAME_LENGTH) && ($service->userExists($username))) {
+            $username_OK = true;
+        }
+
+        // check password
+        if(strlen($password) >= MIN_PASSWORD_LENGTH) {
+            $password1_OK = true;
+        }
+
+        // check password repeat
+        if($password == $password_repeat) {
+            $password2_OK = true;
+        }
+
+        // send if OK
+        if($username_OK && $password1_OK && $password2_OK) {
+            if($service->register($username, $password)) {
+                $_SESSION["user"] = $username;
+                header("Location: friendlist.php");
+            }
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -16,18 +65,20 @@
 
         <link rel="stylesheet" href="assets/css/main.css">
         <link rel="stylesheet" href="assets/css/components.css">
+
     </head>    
     <body>
         <div class="background centerRow">
             <div class="register max-width centerRowV card">
-                <form method="GET" action="friendlist.php" id="registerForm" class="centerRowV" name="registerForm">
+                <form method="POST" action="register.php" id="registerForm" class="centerRowV" name="registerForm">
                     <div class="register-image">
                         <img src="./assets/images/user.png" alt="user" class="image">
                     </div>
 
                     <div class="register-text mElementM">
                         <h1>
-                            Register yourself
+                            <!--Register yourself-->
+                            <?php var_dump(CHAT_SERVER_ID);?>
                         </h1>
                     </div>
                     <fieldset class="register-inputs pContainerS mElement">
@@ -74,8 +125,13 @@
                         <button class="button-create button mElement">Create Account</button>
                     </div>
                 </form>
-                <script type="module" src="assets/js/validate.js"></script>
             </div>   
         </div>
+        <script type="text/javascript">
+            chatToken = "<?= $_SESSION['chat_token'] ?>";
+            window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+            chatServer = "<?= CHAT_SERVER_URL ?>";
+        </script>
+        <script type="module" src="./assets/js/validate.js"></script>
     </body>
 </html>

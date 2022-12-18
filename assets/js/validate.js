@@ -1,4 +1,4 @@
-// get data from config
+/*// get data from config
 let COLLECTION_ID; // initialize empty for global scope
 fetch('./cfg.json')
 .then(response => response.json()) // get object from response
@@ -7,7 +7,12 @@ fetch('./cfg.json')
 })
 .catch(err => { 
     console.error(err);
-});
+});*/
+let COLLECTION_ID = chatCollectionID;
+console.log(window.chatCollectionID);
+setTimeout(function(){
+    console.log(COLLECTION_ID);
+}, 2000);
     
 // get elements
 const form = document.forms.registerForm;
