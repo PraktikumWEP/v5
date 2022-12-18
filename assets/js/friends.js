@@ -1,3 +1,5 @@
+console.log(chatCollectionId);
+
 // search
 let list = document.getElementsByClassName("suggested-friends")[0];
             let input = document.getElementsByClassName("input")[0];

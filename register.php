@@ -128,8 +128,7 @@
             </div>   
         </div>
         <script type="text/javascript">
-            chatToken = "<?= $_SESSION['chat_token'] ?>";
-            window.chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+            chatCollectionId = "<?= CHAT_SERVER_ID ?>";
             chatServer = "<?= CHAT_SERVER_URL ?>";
         </script>
         <script type="module" src="./assets/js/validate.js"></script>

@@ -8,10 +8,9 @@ fetch('./cfg.json')
 .catch(err => { 
     console.error(err);
 });*/
-let COLLECTION_ID = chatCollectionID;
-console.log(window.chatCollectionID);
+console.log(chatCollectionId);
 setTimeout(function(){
-    console.log(COLLECTION_ID);
+    console.log(chatCollectionId);
 }, 2000);
     
 // get elements
