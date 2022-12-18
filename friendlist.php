@@ -88,7 +88,7 @@
                             if(isset($friends)) {
                                 foreach($friends as $friend) {                         
                                     echo "<li>";
-                                    echo         "<a href='chat.php?friend=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>";
+                                    echo         "<a href='chat.php?user=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>";
                                     echo         "<label class='notification-count'>";
                                     if(isset($unread->{$friend->getUsername()})) {
                                         echo $unread->{$friend->getUsername()};

@@ -3,7 +3,7 @@
     use JsonSerializable;
 
     class User implements JsonSerializable {
-        private $username;
+        public $username;
 
         public function __construct($username = null) {
             $this->username = $username;

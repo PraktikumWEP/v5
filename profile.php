@@ -1,5 +1,26 @@
 <?php
     require("start.php");
+    use model\Friend;
+
+    if(!isset($_SESSION["user"])) {
+        header("Location: login.php");
+        exit();
+    }
+
+    $user = $_GET["user"];
+    if($service->userExists($user)) {
+        $user = $service->loadUser($user);
+        if(isset($_POST["remove"])) {
+            $friend = new Friend($_POST["remove"]);
+            if($service->friendRemove($friend)) {
+                header("Location: friendlist.php");
+            }
+        }
+    }
+    else {
+        header("Location: friendlist.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -24,35 +45,46 @@
                     <img src="assets/images/profile.png" class="image"></img>
                 </div>
                 <div class="mElement">
-                    <h1>Profile of Tom</h1>
+                    <h1>Profile of <?= $user->username ?></h1>
                 </div>
                 <div class="breadcrumb mElement">
-                    <a href="chat.php" class="link">&lt; Back to Chat</a>
-                    <label class="breadcrumb-divider">&nbsp;|&nbsp;</label>
-                    <a href="friendlist.php" class="link removeFriend">Remove Friend</a>
+                    <form action="profile.php?user=<?= $user->username ?>" method="POST">
+                        <a href="chat.php" class="link">&lt; Back to Chat</a>
+                        <label class="breadcrumb-divider">&nbsp;|&nbsp;</label>
+                        <a class="link removeFriend submitTrigger">Remove Friend</a>
+                        <input type="hidden" name="remove" value="<?= $user->username ?>">
+                        <input type="submit" id="submit">
+                    </form>
                 </div>
                 <div class="mElement">
                     <p class="paragraph">
-                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.   
-
-            Duis autem vel eum iriure dolor in hendrerit 
+                        <?= $user->description ?>
                     </p>
                 </div>
                 <div class="mElement">
                     <div class="mElement">
                         <label style="font-weight: bold">Coffee or Tea?</label>
                         <div class="mElement">
-                            <label>&emsp;&emsp;Tea</label>
+                            <label>&emsp;&emsp;<?= $user->coffeeOrTea ?></label>
                         </div>
                     </div>
                     <div class="mElement">
                         <label style="font-weight: bold">Name</label>
                         <div class="mElement">
-                            <label>&emsp;&emsp;Thomas</label>
+                            <label>&emsp;&emsp;<?= $user->firstName . " " . $user->lastName ?></label>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            let submit = document.getElementById("submit");
+            let trigger = document.getElementsByClassName("submitTrigger")[0];
+            submit.style.visibility = "hidden";
+            submit.style.display = "none";
+            trigger.addEventListener("click", () => {
+                submit.click();
+            })
+        </script>
     </body>
 </html>
