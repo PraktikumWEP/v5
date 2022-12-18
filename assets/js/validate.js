@@ -1,13 +1,3 @@
-/*// get data from config
-let COLLECTION_ID; // initialize empty for global scope
-fetch('./cfg.json')
-.then(response => response.json()) // get object from response
-.then(data => {
-    COLLECTION_ID = data.COLLECTION_ID; // get ID
-})
-.catch(err => { 
-    console.error(err);
-});*/
 let COLLECTION_ID = chatCollectionId;
     
 // get elements
@@ -161,16 +151,23 @@ function resetErrorMessage() {
 // check if specified name is already in use
 async function checkNameAvailability(name) {
     let uri = "https://online-lectures-cs.thi.de/chat/" + COLLECTION_ID + "/user/" + name;
-    let response = await fetch(uri);
-
-    if (response.status === 204) { // already exists
-        return false;
-    }
-    else if (response.status === 404) { // available
-        return true;
-    }
-    else {
-        console.error('error ' + response.status); // print error
-        return false;
-    }
+    let response;
+    let result;
+    await fetch(uri)
+    .then(response => {
+        if (response.status === 204) { // already exists
+            result = false;
+        }
+        else if (response.status === 404) { // available
+            result = true;
+        }
+        else {
+            console.error('error ' + response.status); // print error
+            result = false;
+        }
+    })
+    .catch(e => {
+        console.error(e);
+    });
+    return result;
 }
