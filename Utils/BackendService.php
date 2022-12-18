@@ -59,6 +59,16 @@ class BackendService {
         }
     }   
 
+    public function loadUsers($value) {
+        try {
+            $result = HttpClient::get($this->url . "/" . $this->id . "/user" . "/$value", $_SESSION["chat_token"]);
+            return $result;
+        } catch(\Exception $e) {
+            echo "<br>load user error: " . $e . "<br>";
+            return null;
+        }
+    }
+
     public function saveUser($user) {
         try {
             HttpClient::post($this->url . "/" . $this->id . "/user", $user->jsonSerialize(), $_SESSION["chat_token"]);
@@ -85,7 +95,7 @@ class BackendService {
 
     public function friendRequest($friend) {
         try {
-            HttpClient::post($this->url . "/" . $this->id . "/friend", $friend->jsonSerialize() ,$_SESSION["chat_token"]);
+            HttpClient::post($this->url . "/" . $this->id . "/friend", $friend->jsonSerialize(), $_SESSION["chat_token"]);
             return true;
         } catch(\Exception $e) {
             echo "<br>friend request error: " . $e . "<br>";
@@ -126,7 +136,7 @@ class BackendService {
     // use for login check
     public function userExists($username) {
         try {
-            HttpClient::get($this->url . "/" . $this->id . "/user" . "/" . $username, $_SESSION["chat_token"]);
+            HttpClient::get($this->url . "/" . $this->id . "/user" . "/" . $username);
             return true;
         } catch(\Exception $e) {
             return false;

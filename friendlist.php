@@ -27,11 +27,30 @@
         $user = new Friend($_POST["accept"]);
         $service->friendAccept($user);
         header("Location: friendlist.php");
+        exit();
     }
     if(isset($_POST["dismiss"])) {
         $user = new Friend($_POST["dismiss"]);
         $service->friendDismiss($user);
         header("Location: friendlist.php");
+        exit();
+    }
+
+    // search friend
+    $search = "";
+    $result2 = $service->loadUsers("");
+    $error = "";
+    if(isset($_POST["search"])) {
+        $search = $_POST["search"];
+        $new_friend = new Friend($search);
+        if($service->userExists($search)) {
+            $service->friendRequest($new_friend);
+            header("Location: friendlist.php");
+            exit();
+        }
+        else {
+            $error = "User does not exist";
+        }
     }
 ?>
 
@@ -76,7 +95,7 @@
                                 }
                             }
                             else {
-                                echo "No friend requests";
+                                echo "No friends";
                             }
                             ?>
                         </ul>
@@ -88,10 +107,10 @@
                         <div class="mElement">
                             <h2>New Requests</h2>
                         </div>
-                        <div>
+                        <div class="centerRow">
                             <ol>
                                 <?php
-                                if(isset($requests)) {
+                                if(count($requests) > 0) {
                                     foreach($requests as $request) {
                                         echo                            
                                             "<li><form acton='friendlist.php' method='POST'>
@@ -104,6 +123,9 @@
                                             </form></li>";
                                     }
                                 }
+                                else {
+                                    echo "No friend requests";
+                                }
                                 ?>
                             </ol>
                         </div>
@@ -111,23 +133,31 @@
                 </div>
                 <hr class="friendlist-divider"></hr>
                 <div class="mElementM">
-                    <form method="GET" action="chat.html" name="addFriend">
+                    <form method="POST" action="friendlist.php" name="addFriend">
                         <div class="mElement">
                             <div class="mElement">
-                                <input type="name" placeholder="Name" class="input" required/>
+                                <input type="name" placeholder="Name" class="input" name="search" value="<?= $search ?>" required/>
                                 <div class="suggested-friends">
                                 </div>
                             </div>
                             <div class="mElementM">
-                                <button class="button">
+                                <button class="button" type="submit">
                                     Add
                                 </button>
                             </div>
                         </div>
                     </form>
+                    <div class="centerRow"><small class="error-message"><?= $error ?></small></div>
                 </div>
             </div>
         </div>
+        <script type="text/javascript">
+            chatToken = "<?= $_SESSION['chat_token'] ?>";
+            chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+            chatServer = "<?= CHAT_SERVER_URL ?>";
+            console.log(window.chatServer);
+            let users = <?= json_encode($result2) ?>;
+        </script>
         <script type="module" src="assets/js/friends.js"></script>
     </body>
 </html>
