@@ -77,8 +77,7 @@
 
                     <div class="register-text mElementM">
                         <h1>
-                            <!--Register yourself-->
-                            <?php var_dump(CHAT_SERVER_ID);?>
+                            Register yourself
                         </h1>
                     </div>
                     <fieldset class="register-inputs pContainerS mElement">
@@ -122,7 +121,7 @@
                         <a href="login.php">
                             <button type="button" class="button-cancel button mElement">Cancel</button>
                         </a>
-                        <button class="button-create button mElement">Create Account</button>
+                        <button type="submit" class="button-create button mElement">Create Account</button>
                     </div>
                 </form>
             </div>   

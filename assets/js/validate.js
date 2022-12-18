@@ -8,10 +8,7 @@ fetch('./cfg.json')
 .catch(err => { 
     console.error(err);
 });*/
-console.log(chatCollectionId);
-setTimeout(function(){
-    console.log(chatCollectionId);
-}, 2000);
+let COLLECTION_ID = chatCollectionId;
     
 // get elements
 const form = document.forms.registerForm;
