@@ -83,15 +83,14 @@
                 <hr class="friendlist-divider "></hr>
                 <div class="mElementM">
                     <section>
-                        <ul>
+                        <ul id="friendlist">
                             <?php
                             if(isset($friends)) {
-                                foreach($friends as $friend) {
-                                    echo                            
-                                        "<li>
-                                            <a href='chat.php?friend=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>
-                                            <label class='notification-count'>0</label>
-                                        </li>";
+                                foreach($friends as $friend) {                         
+                                    echo "<li>";
+                                    echo         "<a href='chat.php?friend=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>";
+                                    echo         "<label class='notification-count'>0</label>";
+                                    echo "</li>";
                                 }
                             }
                             else {
@@ -108,13 +107,13 @@
                             <h2>New Requests</h2>
                         </div>
                         <div class="centerRow">
-                            <ol>
+                            <ul id="requests">
                                 <?php
                                 if(count($requests) > 0) {
                                     foreach($requests as $request) {
                                         echo                            
-                                            "<li><form acton='friendlist.php' method='POST'>
-                                                <a class='link'>Friend request from " . $request->getUsername() ."</a>
+                                            "<li><form action='friendlist.php' method='POST'>
+                                                <a class='link'>Friend request from " . $request->getUsername() . "</a>
                                                 <div class='centerCol mElement'>
                                                     <button type='submit' class='button-small centerRow' name='accept' value='". $request->getUsername() ."'>Accept</button>
                                                     <div style='width: 10px'></div>
@@ -127,7 +126,7 @@
                                     echo "No friend requests";
                                 }
                                 ?>
-                            </ol>
+                            </ul>
                         </div>
                     </section>
                 </div>
@@ -155,7 +154,6 @@
             chatToken = "<?= $_SESSION['chat_token'] ?>";
             chatCollectionId = "<?= CHAT_SERVER_ID ?>";
             chatServer = "<?= CHAT_SERVER_URL ?>";
-            console.log(window.chatServer);
             let users = <?= json_encode($result2) ?>;
         </script>
         <script type="module" src="assets/js/friends.js"></script>
