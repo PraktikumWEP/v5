@@ -2,14 +2,40 @@
     require("start.php");
     use model\User;
 
-    // form
-    $first_name = "";
-    $last_name = "";
-    $coffee_or_tea = "";
-    $description = "";
-    $inline = false;
+    // default
+    $inline = true;
 
-    
+    // get user
+    $user = new User();
+    $user = $service->loadUser($_SESSION["user"]);
+
+    // pull values from form
+    if (isset($_POST["first_name"])) {
+        $user->firstName = $_POST["first_name"];
+    }
+    if (isset($_POST["last_name"])) {
+        $user->lastName = $_POST["last_name"];
+    }
+    if (isset($_POST["coffee_or_tea"])) {
+        $user->coffeeOrTea = $_POST["coffee_or_tea"];
+    }
+    if (isset($_POST["description"])) {
+        $user->description = $_POST["description"];
+    }
+    if (isset($_POST["inline"])) {
+        $user->layout = $_POST["inline"];
+    }
+
+    // layout
+    if ( isset($user->layout) || $user->layout === "dualline") {
+        $inline = false;
+    }
+
+    if(count($_POST) > 0) {
+        $service->saveUser($user);
+        header("Location: friendlist.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>
@@ -32,10 +58,10 @@
             <div class="max-width centerRowV card">
                 <div class="mElementM">
                     <h1>
-                        Profile Settings
+                        <?= var_dump($user) ?>
                     </h1>
                 </div>
-                <form>
+                <form method="POST" action="settings.php">
                     <div class="mElement">
                         <fieldset class="pContainerS">
                             <legend>Base Data</legend>
@@ -44,7 +70,7 @@
                                     <label>First Name</label>
                                 </div>
                                 <div class="mElement">
-                                    <input type="text" placeholder="Your name" class="input" required/>
+                                    <input value="<?php if(isset($user->firstName)) {echo $user->firstName;} ?>"name="first_name" type="text" placeholder="Your name" class="input" required/>
                                 </div>
                             </div>
                             <div class="mElementM">
@@ -52,16 +78,16 @@
                                     <label>Last Name</label>
                                 </div>
                                 <div class="mElement">
-                                    <input type="text" placeholder="Your surname" class="input" required/>
+                                    <input value="<?php if(isset($user->lastName)) {echo $user->lastName;} ?>" type="text" placeholder="Your surname" class="input" name="last_name" required/>
                                 </div>
                             </div>
                             <div class="mElementM">
                                 <label>Coffee or Tea?</label>
-                                <select>
-                                    <option value="Neither">Neither</option>
-                                    <option value="Coffee">Coffee</option>
-                                    <option value="Tea">Tea</option>
-                                    <option value="Both">Both</option>
+                                <select name="coffee_or_tea">
+                                    <option value="Neither" <?php if(!isset($user->coffeeOrTea) || $user->coffeeOrTea === 'Neither'){echo 'selected';} ?>>Neither</option>
+                                    <option value="Coffee" <?php if($user->coffeeOrTea === 'Coffee'){echo 'selected';} ?>>Coffee</option>
+                                    <option value="Tea" <?php if($user->coffeeOrTea === 'Tea'){echo 'selected';} ?>>Tea</option>
+                                    <option value="Both" <?php if($user->coffeeOrTea === 'Both'){echo 'selected';} ?>>Both</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -71,7 +97,7 @@
                         <fieldset class="pContainerS">
                             <legend>Tell Something about you</legend>
                             <div class="mElement">
-                                <textarea placeholder="Leave a comment here" class="input textarea"></textarea>
+                                <textarea name="description" placeholder="Leave a comment here" class="input textarea"><?php if(isset($user->description)) {echo $user->description;} ?></textarea>
                             </div>
                         </fieldset>
                     </div>
@@ -81,11 +107,11 @@
                             <legend>Preferred Chat Layout</legend>
                             <div class="mElement">
                                 <div class="mElement">
-                                    <input type="radio" name="layout1" checked="checked" required/>
+                                    <input type="radio" value="inline" name="inline" <?php if($inline) {echo 'checked';} ?> required/>
                                     <label for="layout1">Username and message in one line</label>
                                 </div>
                                 <div class="mElement">
-                                    <input type="radio" name="layout2" required/>
+                                    <input type="radio" value="dualline" name="inline" <?php if(!$inline) {echo 'checked';} ?> required/>
                                     <label for="layout2">Username and message in seperated lines</label>
                                 </div>
                             </div>
@@ -93,12 +119,12 @@
                     </div>
                     <div class="button-box mElement pContainerS">
                         <a href="friendlist.php">
-                            <button class="button mElement">
+                            <button type="button" class="button mElement">
                                 Cancel
                             </button>
                         </a>
                         <a href="">
-                            <button class="button mElement">
+                            <button type="submit" class="button mElement">
                                 Save
                             </button>
                         </a>

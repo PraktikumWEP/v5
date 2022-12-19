@@ -1,6 +1,7 @@
 <?php
     require("start.php");
     use model\Friend;
+    use model\User;
 
     // check session
     if (!isset($_SESSION["user"]) || $_SESSION["user"] == "") {
@@ -23,6 +24,10 @@
         header("Location: friendlist.php");
         exit();
     }
+
+    // get layout
+    $user = new User();
+    $user = $service->loadUser($_SESSION["user"]);
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +78,7 @@
                     chatServer = "<?= CHAT_SERVER_URL ?>";
                     chatUser = "<?= $other_user ?>"
                     chatToken = "<?= $_SESSION["chat_token"] ?>";
+                    chatInline = "<?= $user->layout ?>";
                 </script>
                 <script type="module" src="assets/js/chat.js"></script>
                 <form method="post" action="chat.php" name="sendMessage">
@@ -94,7 +100,7 @@
             submit.style.display = "none";
             trigger.addEventListener("click", () => {
                 submit.click();
-            })
+            });
         </script>
     </body>
 </html>

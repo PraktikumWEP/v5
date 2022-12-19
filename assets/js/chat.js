@@ -10,6 +10,12 @@ let user = chatUser;
 let token = chatToken;
 let bearerHeader = "Bearer " + token;
 
+// set inline variable
+let inline = true;
+if(chatInline === "dualline") {
+    inline = false;
+}
+
 // initial load
 loadMessages(token);
 
