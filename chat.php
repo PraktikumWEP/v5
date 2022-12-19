@@ -20,10 +20,6 @@
             }
         }
     }
-    else {
-        header("Location: friendlist.php");
-        exit();
-    }
 
     // get layout
     $user = new User();
