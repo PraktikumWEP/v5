@@ -72,7 +72,7 @@
                                     <label>First Name</label>
                                 </div>
                                 <div class="mElement">
-                                    <input value="<?php if(isset($user->firstName)) {echo $user->firstName;} ?>"name="first_name" type="text" placeholder="Your name" class="input" required/>
+                                    <input value="<?php if(isset($user->firstName)) {echo $user->firstName;} ?>"name="first_name" type="text" placeholder="Your name" class="input"/>
                                 </div>
                             </div>
                             <div class="mElementM">
@@ -80,7 +80,7 @@
                                     <label>Last Name</label>
                                 </div>
                                 <div class="mElement">
-                                    <input value="<?php if(isset($user->lastName)) {echo $user->lastName;} ?>" type="text" placeholder="Your surname" class="input" name="last_name" required/>
+                                    <input value="<?php if(isset($user->lastName)) {echo $user->lastName;} ?>" type="text" placeholder="Your surname" class="input" name="last_name"/>
                                 </div>
                             </div>
                             <div class="mElementM">
