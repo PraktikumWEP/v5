@@ -27,8 +27,10 @@
     }
 
     // layout
-    if ( $user->layout === "dualline") {
-        $inline = false;
+    if (isset($_POST["layout"])) {
+        if ( $user->layout === "dualline") {
+            $inline = false;
+        }
     }
 
     if(count($_POST) > 0) {
