@@ -87,9 +87,9 @@
                                 <label>Coffee or Tea?</label>
                                 <select name="coffee_or_tea">
                                     <option value="Neither" <?php if(!isset($user->coffeeOrTea) || $user->coffeeOrTea === 'Neither'){echo 'selected';} ?>>Neither</option>
-                                    <option value="Coffee" <?php if(isset($user->coffeOrTea)){if($user->coffeeOrTea === 'Coffee'){echo 'selected';}} ?>>Coffee</option>
+                                    <option value="Coffee" <?php if(isset($user->coffeeOrTea)){if($user->coffeeOrTea === 'Coffee'){echo 'selected';}} ?>>Coffee</option>
                                     <option value="Tea" <?php if(isset($user->coffeeOrTea)){if($user->coffeeOrTea === 'Tea'){echo 'selected';}} ?>>Tea</option>
-                                    <option value="Both" <?php if(isset($user->coffeOrTea)){if($user->coffeeOrTea === 'Both'){echo 'selected';}} ?>>Both</option>
+                                    <option value="Both" <?php if(isset($user->coffeeOrTea)){if($user->coffeeOrTea === 'Both'){echo 'selected';}} ?>>Both</option>
                                 </select>
                             </div>
                         </fieldset>
