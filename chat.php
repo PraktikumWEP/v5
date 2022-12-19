@@ -4,14 +4,14 @@
     use model\User;
 
     // check session
-    if (!isset($_SESSION["user"]) || $_SESSION["user"] == "") {
+    if (!isset($_SESSION["user"])) {
         header("Location: login.php");
         exit();
     }
 
     // check query parameters
     $other_user = false;
-    if (isset($_GET['user']) && $_GET['user'] != "") {
+    if (isset($_GET['user'])) {
         $other_user = $_GET['user'];
         if (isset($_POST["remove"])) {
             $friend = new Friend($_POST["remove"]);
