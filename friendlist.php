@@ -85,7 +85,7 @@
                     <section>
                         <ul id="friendlist">
                             <?php
-                            if(isset($friends)) {
+                            if(count($friends) > 0) {
                                 foreach($friends as $friend) {                         
                                     echo "<li>";
                                     echo         "<a href='chat.php?user=" . $friend->getUsername() . "' class='link'>" . $friend->getUsername() . "</a>";
