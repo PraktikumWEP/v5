@@ -54,14 +54,14 @@
         <link rel="stylesheet" href="assets/css/components.css">
     </head>
     <body>
-        <div class="background centerRow">
-            <div class="max-width centerRowV card">
-                <div class="mElementM">
-                    <h1>
-                        Profile Settings
-                    </h1>
-                </div>
-                <form method="POST" action="settings.php">
+        <form method="POST" action="settings.php">
+            <div class="background centerRow">
+                <div class="max-width centerRowV card">
+                    <div class="mElementM">
+                        <h1>
+                            Profile Settings
+                        </h1>
+                    </div>
                     <div class="mElement">
                         <fieldset class="pContainerS">
                             <legend>Base Data</legend>
@@ -85,9 +85,9 @@
                                 <label>Coffee or Tea?</label>
                                 <select name="coffee_or_tea">
                                     <option value="Neither" <?php if(!isset($user->coffeeOrTea) || $user->coffeeOrTea === 'Neither'){echo 'selected';} ?>>Neither</option>
-                                    <option value="Coffee" <?php if($user->coffeeOrTea === 'Coffee'){echo 'selected';} ?>>Coffee</option>
-                                    <option value="Tea" <?php if($user->coffeeOrTea === 'Tea'){echo 'selected';} ?>>Tea</option>
-                                    <option value="Both" <?php if($user->coffeeOrTea === 'Both'){echo 'selected';} ?>>Both</option>
+                                    <option value="Coffee" <?php if(isset($user->coffeOrTea)){if($user->coffeeOrTea === 'Coffee'){echo 'selected';}} ?>>Coffee</option>
+                                    <option value="Tea" <?php if(isset($user->coffeeOrTea)){if($user->coffeeOrTea === 'Tea'){echo 'selected';}} ?>>Tea</option>
+                                    <option value="Both" <?php if(isset($user->coffeOrTea)){if($user->coffeeOrTea === 'Both'){echo 'selected';}} ?>>Both</option>
                                 </select>
                             </div>
                         </fieldset>
@@ -129,9 +129,9 @@
                             </button>
                         </a>
                     </div>
-                </form>
+                </div>
             </div>
-        </div>
+        </form>
     </body>
 </html>
 
