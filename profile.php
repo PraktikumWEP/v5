@@ -49,7 +49,7 @@
                 </div>
                 <div class="breadcrumb mElement">
                     <form action="profile.php?user=<?= $user->username ?>" method="POST">
-                        <a href="chat.php" class="link">&lt; Back to Chat</a>
+                        <a href="chat.php?user=<?= $user->username ?>" class="link">&lt; Back to Chat</a>
                         <label class="breadcrumb-divider">&nbsp;|&nbsp;</label>
                         <a class="link removeFriend submitTrigger">Remove Friend</a>
                         <input type="hidden" name="remove" value="<?= $user->username ?>">

@@ -5,7 +5,7 @@
     $username = "";
     $password = "";
     $password_repeat = "";
-    if(isset($_POST["username"]) && isset($_POST["password1"]) && isset($_POST["password2"])) {
+    if (isset($_POST["username"]) && isset($_POST["password1"]) && isset($_POST["password2"])) {
 
         // constants
         define("MIN_PASSWORD_LENGTH", 8);
@@ -27,26 +27,25 @@
         $password2_OK = false;
 
         // check username
-        if((strlen($username) >= MIN_USERNAME_LENGTH) && ($service->userExists($username))) {
+        if ((strlen($username) >= MIN_USERNAME_LENGTH) && !($service->userExists($username))) {
             $username_OK = true;
         }
 
         // check password
-        if(strlen($password) >= MIN_PASSWORD_LENGTH) {
+        if (strlen($password) >= MIN_PASSWORD_LENGTH) {
             $password1_OK = true;
         }
 
         // check password repeat
-        if($password == $password_repeat) {
+        if ($password == $password_repeat) {
             $password2_OK = true;
         }
 
         // send if OK
-        if($username_OK && $password1_OK && $password2_OK) {
-            if($service->register($username, $password)) {
-                $_SESSION["user"] = $username;
-                header("Location: friendlist.php");
-            }
+        if ($username_OK && $password1_OK && $password2_OK && $service->register($username, $password)) {
+            $_SESSION["user"] = $username;
+            header("Location: friendlist.php");
+            exit();
         }
     }
 ?>

@@ -1,27 +1,13 @@
 // global variables
-let COLLECTION_ID;
+let COLLECTION_ID = chatCollectionId;
 let TOM_TOKEN; // initialize empty for global scope
 let JERRY_TOKEN;
 const chat = document.getElementById("chat"); // global
 let oldMessages = []; // save old messages to make refresh invisible
 
-// MAIN
-
-// fetch config data
-await fetch('./cfg.json')
-.then(response => response.json()) // get object from response
-.then(data => {
-    COLLECTION_ID = data.COLLECTION_ID;
-    TOM_TOKEN = data.tom.token;
-    JERRY_TOKEN = data.jerry.token;
-})
-.catch(err => { 
-    console.error(err);
-});
-
 // which chat (temporary)
-let user = "Jerry";
-let token = TOM_TOKEN;
+let user = chatUser;
+let token = chatToken;
 let bearerHeader = "Bearer " + token;
 
 // initial load
