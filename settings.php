@@ -27,7 +27,7 @@
     }
 
     // layout
-    if ( isset($user->layout) || $user->layout === "dualline") {
+    if ( $user->layout === "dualline") {
         $inline = false;
     }
 
@@ -58,7 +58,7 @@
             <div class="max-width centerRowV card">
                 <div class="mElementM">
                     <h1>
-                        <?= var_dump($user) ?>
+                        Profile Settings
                     </h1>
                 </div>
                 <form method="POST" action="settings.php">

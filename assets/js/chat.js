@@ -74,13 +74,22 @@ function loadMessages(token) {
 
 // show messages arry from fetch (calls addMessage)
 function showMessages(messages) {
-    for(let msg of messages.reverse()) {
-        addMessage(msg);
-    }
+    messages.forEach(msg => addMessage(msg));
+    scroll();
 }
 
 // add a message to the chat
 function addMessage(msg) {
+
+     /* structure:
+        <div class='chat-message'>
+            <div class='chat-helper-div'> <!--or chat-helper-div-column-->
+                <div class='chat-message-user'></div>
+                <div class='chat-message-text'></div>
+            </div>
+            <div class='time chat-helper-div'></div>
+        </div>
+    */
 
     // get data from msg
     let sender = msg.from;
@@ -97,10 +106,15 @@ function addMessage(msg) {
 
     // add CSS classes
     chat_message.className = "chat-message mElement";
-    chat_helper_div.className = "chat-helper-div";
     chat_message_user.className = "chat-message-user";
     chat_message_text.className = "chat-message-text";
     time_div.className = "time chat-helper-div";
+    if(inline) {
+        chat_helper_div.className = "chat-helper-div";
+    }
+    else {
+        chat_helper_div.className = "chat-helper-div-column";
+    }
 
     // structure
     chat.appendChild(chat_message);
@@ -112,7 +126,12 @@ function addMessage(msg) {
     // inner HTML
     time_div.innerHTML = time;
     chat_message_user.innerHTML = sender + ":&nbsp";
-    chat_message_text.innerHTML = content;
+    if(inline) {
+        chat_message_text.innerHTML = content;
+    }
+    else {
+        chat_message_text.innerHTML = "&nbsp" + content;
+    }
 }
 
 // remove all messages from chat (calls removeChilds)
@@ -148,4 +167,9 @@ function removeChilds(parent) {
     while (parent.lastChild) {
         parent.removeChild(parent.lastChild);
     }
+}
+
+// scroll div to bottom
+function scroll() {
+    chat.scrollTop = chat.scrollHeight;
 }
