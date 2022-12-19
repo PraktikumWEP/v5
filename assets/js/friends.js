@@ -97,7 +97,7 @@ setInterval(async () => {
                 count = result2[friend.username];
             }
             let li = document.createElement("li");
-            li.innerHTML = "<a href='chat.php?friend=" + friend.username + "' class='link'>" + friend.username + "</a>" +
+            li.innerHTML = "<a href='chat.php?user=" + friend.username + "' class='link'>" + friend.username + "</a>" +
                            "<label class='notification-count'>" + count + "</label>";
             friends.appendChild(li);
         }
