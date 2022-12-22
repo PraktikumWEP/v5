@@ -5,9 +5,7 @@ const chat = document.getElementById("chat"); // global
 let oldMessages = []; // save old messages to make refresh invisible
 
 // which chat (temporary)
-let user = chatUser;
-let token = chatToken;
-let bearerHeader = "Bearer " + token;
+let bearerHeader = "Bearer " + chatToken;
 
 // set inline variable
 let inline = true;
