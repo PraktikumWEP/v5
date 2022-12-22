@@ -1,7 +1,14 @@
+let submit = document.getElementById("submit");
+let trigger = document.getElementsByClassName("submitTrigger")[0];
+submit.style.visibility = "hidden";
+submit.style.display = "none";
+trigger.addEventListener("click", () => {
+    submit.click();
+});
+
+
 // global variables
 let COLLECTION_ID = chatCollectionId;
-let TOM_TOKEN; // initialize empty for global scope
-let JERRY_TOKEN;
 const chat = document.getElementById("chat"); // global
 let oldMessages = []; // save old messages to make refresh invisible
 

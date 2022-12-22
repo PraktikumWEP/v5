@@ -10,7 +10,7 @@
     }
 
     // check query parameters
-    $other_user = false;
+    $other_user;
     if (isset($_GET['user'])) {
         $other_user = $_GET['user'];
         if (isset($_POST["remove"])) {
@@ -73,14 +73,6 @@
                         </div>
                     </fieldset>
                 </div>
-                <script type="text/javascript">
-                    chatCollectionId = "<?= CHAT_SERVER_ID ?>";
-                    chatServer = "<?= CHAT_SERVER_URL ?>";
-                    chatUser = "<?= $other_user ?>"
-                    chatToken = "<?= $_SESSION["chat_token"] ?>";
-                    chatInline = "<?= $user->layout ?>";
-                </script>
-                <script type="module" src="assets/js/chat.js"></script>
                 <form method="post" action="chat.php" name="sendMessage">
                     <div class="chat-new-message mElementM">
                         <div class="mElement">
@@ -94,13 +86,12 @@
             </div>
         </div>
         <script type="text/javascript">
-            let submit = document.getElementById("submit");
-            let trigger = document.getElementsByClassName("submitTrigger")[0];
-            submit.style.visibility = "hidden";
-            submit.style.display = "none";
-            trigger.addEventListener("click", () => {
-                submit.click();
-            });
+            chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+            chatServer = "<?= CHAT_SERVER_URL ?>";
+            chatUser = "<?= $other_user ?>"
+            chatToken = "<?= $_SESSION["chat_token"] ?>";
+            chatInline = "<?= $user->layout ?>";
         </script>
+        <script type="module" src="assets/js/chat.js"></script>
     </body>
 </html>
