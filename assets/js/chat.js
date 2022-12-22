@@ -4,9 +4,6 @@ let JERRY_TOKEN;
 const chat = document.getElementById("chat"); // global
 let oldMessages = []; // save old messages to make refresh invisible
 
-// which chat (temporary)
-let bearerHeader = "Bearer " + chatToken;
-
 // set inline variable
 let inline = true;
 if(chatInline === "dualline") {
@@ -52,7 +49,7 @@ function loadMessages(token) {
     fetch(uri, {
         method: "GET",
         headers: {
-            "Authorization": bearerHeader
+            "Authorization": "Bearer " + chatToken
         }
     })
     .then(response => response.json())
