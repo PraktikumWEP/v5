@@ -74,11 +74,11 @@
                     </fieldset>
                 </div>
                 <script type="text/javascript">
-                    chatCollectionId = "<?= CHAT_SERVER_ID ?>";
-                    chatServer = "<?= CHAT_SERVER_URL ?>";
-                    chatUser = "<?= $other_user ?>"
-                    chatToken = "<?= $_SESSION["chat_token"] ?>";
-                    chatInline = "<?= $user->layout ?>";
+                    let chatCollectionId = "<?= CHAT_SERVER_ID ?>";
+                    let chatServer = "<?= CHAT_SERVER_URL ?>";
+                    let chatUser = "<?= $other_user ?>"
+                    let chatToken = "<?= $_SESSION["chat_token"] ?>";
+                    let chatInline = "<?= $user->layout ?>";
                 </script>
                 <script type="module" src="assets/js/chat.js"></script>
                 <form method="post" action="chat.php" name="sendMessage">
