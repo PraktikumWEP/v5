@@ -49,7 +49,7 @@ function loadMessages(token) {
     fetch(uri, {
         method: "GET",
         headers: {
-            "Authorization": "Bearer " + token
+            "Authorization": "Bearer " + chatToken
         }
     })
     .then(response => response.json())
