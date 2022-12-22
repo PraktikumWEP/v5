@@ -1,4 +1,5 @@
 // global variables
+let COLLECTION_ID = chatCollectionId;
 let TOM_TOKEN; // initialize empty for global scope
 let JERRY_TOKEN;
 const chat = document.getElementById("chat"); // global
@@ -45,7 +46,7 @@ input.addEventListener("keypress", (e) => {
 function loadMessages(token) {
 
     // vars for request
-    let uri = "https://online-lectures-cs.thi.de/chat/" + chatCollectionId + "/message/" + user;
+    let uri = "https://online-lectures-cs.thi.de/chat/" + COLLECTION_ID + "/message/" + user;
 
     // vars for data
     let messages = [];
