@@ -77,7 +77,7 @@
                     let chatCollectionId = "<?= CHAT_SERVER_ID ?>";
                     let chatServer = "<?= CHAT_SERVER_URL ?>";
                     let user = "<?= $other_user ?>"
-                    let chatToken = "<?= $_SESSION["chat_token"] ?>";
+                    let token = "<?= $_SESSION["chat_token"] ?>";
                     let chatInline = "<?= $user->layout ?>";
                 </script>
                 <script type="module" src="assets/js/chat.js"></script>
